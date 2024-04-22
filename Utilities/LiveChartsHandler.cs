@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectManager.ViewModels
+namespace ProjectManager.Utilities
 {
-    partial class MainWindow
+    internal class LiveChartsHandler
     {
-        public void ShowProject()
-        {
-        }
     }
 }

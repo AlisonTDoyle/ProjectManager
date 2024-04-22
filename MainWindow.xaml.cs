@@ -17,5 +17,10 @@ namespace ProjectManager
         {
             Main.Content = new ProjectDashboard();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new Settings();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignColors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace ProjectManager.Pages
     /// </summary>
     public partial class ProjectDetails : Page
     {
+        public Color tileColor = Color.FromArgb(25, 124, 124, 124);
+
         public ProjectDetails()
         {
             InitializeComponent();

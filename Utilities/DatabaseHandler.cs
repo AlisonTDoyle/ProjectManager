@@ -9,7 +9,7 @@ namespace ProjectManager.Utilities
 {
     internal class DatabaseHandler
     {
-        ProjectDBEntities1 db = new ProjectDBEntities1();
+        ProjectDBEntities db = new ProjectDBEntities();
 
         //Projects Table
         public List<Project> FetchProjects()

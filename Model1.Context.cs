@@ -13,10 +13,10 @@ namespace ProjectManager
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ProjectDBEntities1 : DbContext
+    public partial class ProjectDBEntities : DbContext
     {
-        public ProjectDBEntities1()
-            : base("name=ProjectDBEntities1")
+        public ProjectDBEntities()
+            : base("name=ProjectDBEntities")
         {
         }
     
