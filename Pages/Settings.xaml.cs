@@ -36,13 +36,21 @@ namespace ProjectManager.Pages
             if (currentTheme == BaseTheme.Dark)
             {
                 theme.SetBaseTheme(BaseTheme.Light);
+                UpdateSelectedThemeInSettings("light");
             } 
             else
             {
                 theme.SetBaseTheme(BaseTheme.Dark);
+                UpdateSelectedThemeInSettings("dark");
             }
 
             paletteHelper.SetTheme(theme);
+        }
+
+        private void UpdateSelectedThemeInSettings(string theme)
+        {
+            Properties.Settings.Default.theme = theme;
+            Properties.Settings.Default.Save();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
