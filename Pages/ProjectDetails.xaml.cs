@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using LiveCharts;
+using LiveCharts.Wpf;
+using LiveCharts.Defaults;
 
 namespace ProjectManager.Pages
 {
@@ -13,6 +16,9 @@ namespace ProjectManager.Pages
     public partial class ProjectDetails : Page
     {
         private readonly int _projectId;
+
+        public SeriesCollection SeriesCollection { get; set; }
+
 
         public ProjectDetails(int projectId)
         {
@@ -81,6 +87,7 @@ namespace ProjectManager.Pages
             // Fetch project details
             DatabaseHandler handler = new DatabaseHandler();
             Project project = (Project)handler.FetchProjectById(_projectId);
+            List<Task> projectTasks = handler.FetchTasks(_projectId);
 
             // Display project details
             tblkProjectName.Text = project.Name;
@@ -90,6 +97,11 @@ namespace ProjectManager.Pages
             tblkDueDate.Text = test2;
 
             RefreshProjectTasks();
+
+            LiveChartsHandler liveChartsHandler = new LiveChartsHandler();
+            SeriesCollection = liveChartsHandler.createTaskChartData(projectTasks);
+
+            DataContext = this;
         }
 
     }

@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:ProjectManager.Pages"
       xmlns:utilities="clr-namespace:ProjectManager.Utilities"
       xmlns:System="clr-namespace:System;assembly=mscorlib"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
       Background="{DynamicResource MaterialDesign.Brush.Background}"
       mc:Ignorable="d" 
@@ -15,10 +16,10 @@
     <Page.Resources>
         <utilities:IntToStatusConverter x:Key="intToStatus"/>
     </Page.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="480"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -28,7 +29,14 @@
                 <TextBlock x:Name="tblkSubject"/>
                 <TextBlock x:Name="tblkDueDate"/>
                 <TextBlock x:Name="tblkCompletePercentage"/>
-
+                <lvc:PieChart x:Name="Chart" Grid.Row="1" Series="{Binding SeriesCollection}" LegendLocation="Right" InnerRadius="48" Margin="0 15" Height="240">
+                    <!--<lvc:PieChart.ChartLegend>
+                        <lvc:DefaultLegend BulletSize="20"></lvc:DefaultLegend>
+                    </lvc:PieChart.ChartLegend>-->
+                    <lvc:PieChart.DataTooltip>
+                        <lvc:DefaultTooltip BulletSize="20"/>
+                    </lvc:PieChart.DataTooltip>
+                </lvc:PieChart>
                 <Button Content="Add New Task" x:Name="btnNewTask" Click="btnNewTask_Click" Margin="0,12"/>
                 <Button Content="Delete Project" VerticalAlignment="Bottom" x:Name="btnDeleteProject" Click="btnDeleteProject_Click" Background="#FFE86842"/>
             </StackPanel>
