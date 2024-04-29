@@ -4,47 +4,54 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProjectManager.Pages"
+      xmlns:utilities="clr-namespace:ProjectManager.Utilities"
       xmlns:System="clr-namespace:System;assembly=mscorlib"
       TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
       Background="{DynamicResource MaterialDesign.Brush.Background}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ProjectDetails">
+      Title="ProjectDetails" Loaded="Page_Loaded">
 
     <Page.Resources>
-        
+        <utilities:IntToStatusConverter x:Key="intToStatus"/>
     </Page.Resources>
     
     <Grid>
-        <!--Grid definitions-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="280"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <!--Information side bar-->
-        <Border Background="#3D7C7C7C" CornerRadius="12" Grid.RowSpan="2" Margin="8">
+        <Border Background="#147C7C7C" CornerRadius="12" Grid.RowSpan="2" Padding="16">
             <StackPanel>
-                <TextBlock FontSize="32" Foreground="White" Text="Project Name" x:Name="tblkProjectName"/>
-                <ComboBox>
-                    <ComboBoxItem>Test</ComboBoxItem>
-                    <ComboBoxItem>Test</ComboBoxItem>
-                    <ComboBoxItem>Test</ComboBoxItem>
-                </ComboBox>
+                <TextBlock FontSize="32" FontWeight="Bold" x:Name="tblkProjectName"/>
+                <TextBlock x:Name="tblkSubject"/>
+                <TextBlock x:Name="tblkDueDate"/>
+                <TextBlock x:Name="tblkCompletePercentage"/>
+
+                <Button Content="Add New Task" x:Name="btnNewTask" Click="btnNewTask_Click" Margin="0,12"/>
+                <Button Content="Delete Project" VerticalAlignment="Bottom" x:Name="btnDeleteProject" Click="btnDeleteProject_Click" Background="#FFE86842"/>
             </StackPanel>
         </Border>
 
-        <!--Task controller bar-->
-        <Border Padding="16" CornerRadius="12" Grid.Column="1" Margin="8" Background="#3D7C7C7C">
-            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
-                <Button Content="Create New Task" Padding="12,4"/>
-            </StackPanel>
-        </Border>
-
+        <DataGrid Grid.Column="1" Grid.Row="1" Margin="32,32,0,0" x:Name="dgProjectTasks" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Task Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                <DataGridTextColumn Header="Staus" Binding="{Binding Status, Converter={StaticResource intToStatus}}"/>
+                <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate, StringFormat='{}{0:dd MMMM yyyy}'}"/>
+                <DataGridTemplateColumn Header="Actions">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="btnDeleteTask" Content="Delete"/>
+                                <Button x:Name="btnEditTask" Content="Edit" Margin="12,0,0,0"/>
+                                <Button x:Name="btnChangeTaskStatus" Content="Mark as XX" Margin="12,0,0,0"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>
