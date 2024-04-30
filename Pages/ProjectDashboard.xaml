@@ -13,19 +13,22 @@
 
     <!--Conditional styling for due date column-->
     <Page.Resources>
-        <utilities:DatagridConverters x:Key="daysLeftToColor"/>
+        <utilities:DateToColorConverter x:Key="daysLeftToColor"/>
         
         <Style x:Key="ConditionalCellStyle" TargetType="DataGridCell">
             <Style.Triggers>
                 <!-- Use the OverDayOldConverter to check if the value is over a day old -->
                 <DataTrigger Binding="{Binding Path=DueDate, Converter={StaticResource daysLeftToColor}}" Value="1">
                     <Setter Property="Foreground" Value="#FF50D27C"/>
+                    <Setter Property="Margin" Value="0,8,0,0"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=DueDate, Converter={StaticResource daysLeftToColor}}" Value="2">
                     <Setter Property="Foreground" Value="#FFD0CB45"/>
+                    <Setter Property="Margin" Value="0,8,0,0"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=DueDate, Converter={StaticResource daysLeftToColor}}" Value="3">
                     <Setter Property="Foreground" Value="#FFE86842"/>
+                    <Setter Property="Margin" Value="0,8,0,0"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>

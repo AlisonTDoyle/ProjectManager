@@ -61,27 +61,6 @@ namespace ProjectManager.Pages
             dgProjectTasks.ItemsSource = projectTasks;
         }
 
-        private void btnDeleteTask_Click(object sender, RoutedEventArgs e)
-        {
-            object selectedTask = dgProjectTasks.SelectedItem;
-
-            if (selectedTask != null)
-            {
-                Task task = selectedTask as Task;
-
-                // Remove item from list
-                DatabaseHandler handler = new DatabaseHandler();
-                handler.RemoveTask(task.Id);
-
-                // Update creator ui
-                RefreshProjectTasks();
-            }
-            else
-            {
-                System.Windows.MessageBox.Show("Make sure you have selected an item to delete", "Error");
-            }
-        }
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             // Fetch project details
@@ -104,5 +83,30 @@ namespace ProjectManager.Pages
             DataContext = this;
         }
 
+        private void DeleteItem()
+        {
+            object selectedTask = dgProjectTasks.SelectedItem;
+
+            if (selectedTask != null)
+            {
+                Task task = selectedTask as Task;
+
+                // Remove item from list
+                DatabaseHandler handler = new DatabaseHandler();
+                handler.RemoveTask(task.Id);
+
+                // Update creator ui
+                RefreshProjectTasks();
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Make sure you have selected an item to delete", "Error");
+            }
+        }
+
+        private void btnDeleteTask_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteItem();
+        }
     }
 }
