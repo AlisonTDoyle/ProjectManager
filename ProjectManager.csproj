@@ -172,6 +172,7 @@
     </Compile>
     <Compile Include="Partial Classes\Project.cs" />
     <Compile Include="Utilities\DatabaseHandler.cs" />
+    <Compile Include="Utilities\DatagridConverters.cs" />
     <Compile Include="Utilities\IntToStatusConverter.cs" />
     <Compile Include="Utilities\LiveChartsHandler.cs" />
     <Compile Include="Project.cs">

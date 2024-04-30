@@ -30,6 +30,6 @@
         </StackPanel>
         
         <!--App pages-->
-        <Frame Grid.Row="1" Grid.ColumnSpan="2" x:Name="Main" x:FieldModifier="public" NavigationUIVisibility="Hidden"/>
+        <Frame Grid.Row="1" Grid.ColumnSpan="2" x:Name="Main" x:FieldModifier="public" NavigationUIVisibility="Hidden" Navigated="Main_Navigated"/>
     </Grid>
 </Window>

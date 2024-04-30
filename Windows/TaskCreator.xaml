@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectManager.Windows"
         mc:Ignorable="d"
-        Title="Task Creator" Height="320" Width="320" WindowStyle="ToolWindow"
+        Title="Task Creator" Height="320" Width="320"
       TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
-      Background="{DynamicResource MaterialDesign.Brush.Background}" WindowStartupLocation="CenterOwner">
+      Background="{DynamicResource MaterialDesign.Brush.Background}" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
     <Border CornerRadius="12" Grid.Column="0" Grid.Row="1" Padding="16">
         <Grid>
             <!--Form layout-->

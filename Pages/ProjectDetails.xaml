@@ -30,9 +30,6 @@
                 <TextBlock x:Name="tblkDueDate"/>
                 <TextBlock x:Name="tblkCompletePercentage"/>
                 <lvc:PieChart x:Name="Chart" Grid.Row="1" Series="{Binding SeriesCollection}" LegendLocation="Right" InnerRadius="48" Margin="0 15" Height="240">
-                    <!--<lvc:PieChart.ChartLegend>
-                        <lvc:DefaultLegend BulletSize="20"></lvc:DefaultLegend>
-                    </lvc:PieChart.ChartLegend>-->
                     <lvc:PieChart.DataTooltip>
                         <lvc:DefaultTooltip BulletSize="20"/>
                     </lvc:PieChart.DataTooltip>
