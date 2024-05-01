@@ -16,6 +16,7 @@
     <Page.Resources>
         <utilities:IntToStatusConverter x:Key="intToStatus"/>
         <utilities:DateToColorConverter x:Key="daysLeftToColor"/>
+        <utilities:IntToNextStatus x:Key="intToNestStatus"/>
 
         <Style x:Key="ConditionalCellStyle" TargetType="DataGridCell">
             <Style.Triggers>
@@ -31,6 +32,17 @@
                 <DataTrigger Binding="{Binding Path=DueDate, Converter={StaticResource daysLeftToColor}}" Value="3">
                     <Setter Property="Foreground" Value="#FFE86842"/>
                     <Setter Property="Margin" Value="0,8,0,0"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
+        <Style x:Key="DisableButtonBasedOnStatus" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+            <Setter Property="IsEnabled" Value="True" />
+
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Status}" Value="2">
+
+                    <Setter Property="IsEnabled" Value="False" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -69,8 +81,8 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <Button x:Name="btnDeleteTask" Content="Delete" Click="btnDeleteTask_Click" Background="#FFE86842"/>
-                                <Button x:Name="btnEditTask" Content="Edit" Margin="12,0,0,0"/>
-                                <Button x:Name="btnChangeTaskStatus" Content="Mark as XX" Margin="12,0,0,0"/>
+                                <Button x:Name="btnEditTask" Content="Edit" Margin="12,0,0,0" Click="btnEditTask_Click"/>
+                                <Button x:Name="btnChangeTaskStatus" Content="{Binding Status, Converter={StaticResource intToNestStatus}}" Style="{StaticResource DisableButtonBasedOnStatus}" Margin="12,0,0,0" Click="btnChangeTaskStatus_Click"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

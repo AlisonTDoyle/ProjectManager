@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Xml.Linq;
 
 namespace ProjectManager.Utilities
 {
@@ -137,13 +139,42 @@ namespace ProjectManager.Utilities
 
             // Remove selected task
             db.Tasks.Remove(taskToDelete);
-
             db.SaveChanges();
         }
 
         public void CreateProjectTask(Task newTask)
         {
             db.Tasks.Add(newTask);
+            db.SaveChanges();
+        }
+
+        public void UpdateProjectTask(int id, string name, string desc, DateTime dueDate)
+        {
+            // Get item to update
+            var taskToUpdate = (from task in db.Tasks
+                        where task.Id == id
+                        select task).FirstOrDefault();
+
+            // Change properties
+            taskToUpdate.Name = name;
+            taskToUpdate.Description = desc;
+            taskToUpdate.DueDate = dueDate;
+
+            // Save changes
+            db.SaveChanges();
+        }
+        
+        public void UpdateProjectTaskStatus(int id, int status)
+        {
+            // Get item to update
+            var taskToUpdate = (from task in db.Tasks
+                                where task.Id == id
+                                select task).FirstOrDefault();
+
+            // Update status
+            taskToUpdate.Status = status;
+
+            // Save changes
             db.SaveChanges();
         }
         #endregion

@@ -42,4 +42,25 @@ namespace ProjectManager.Utilities
             return statusCode;
         }
     }
+
+    // For 'convert to next status' buttons
+    public class IntToNextStatus : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string status = "Completed";
+
+            if ((int)value == 0)
+            {
+                status = "In Progress";
+            }
+
+            return $"Mark as '{status}'";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
