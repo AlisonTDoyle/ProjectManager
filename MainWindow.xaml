@@ -5,18 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
-    <Grid>
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
+        Background="{DynamicResource MaterialDesign.Brush.Background}"
+        Style="{StaticResource MaterialDesignWindow}"
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded" WindowState="Maximized">
+    <Grid Margin="32">
+        <!--Grid definitions-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="90*"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <StackPanel Orientation="Horizontal">
-            <Button Content="Settings" Margin="8" Padding="4"/>
-            <Button Content="New Project Creator" Margin="8" Padding="4"/>
+        
+        <!--Top app bar-->
+        <Label Content="Project Manager" FontSize="40" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Content="Go Back" Margin="12" Padding="12, 4" VerticalAlignment="Center" Width="160" x:Name="btnDisplayProjectDashboard" Click="btnDisplayProjectDashboard_Click" Style="{StaticResource MaterialDesignOutlinedButton}"/>
+            <Button Content="Settings" HorizontalAlignment="Right" Padding="12, 4" Width="160" VerticalAlignment="Center" Click="Button_Click"/>
         </StackPanel>
-
-        <DataGrid Grid.Row="1" Margin="8" x:Name="dgProjects"/>
+        
+        <!--App pages-->
+        <Frame Grid.Row="1" Grid.ColumnSpan="2" x:Name="Main" x:FieldModifier="public" NavigationUIVisibility="Hidden" Navigated="Main_Navigated"/>
     </Grid>
 </Window>

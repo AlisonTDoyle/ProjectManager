@@ -22,7 +22,6 @@ namespace ProjectManager
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public Nullable<int> Status { get; set; }
         public Nullable<System.DateTime> DueDate { get; set; }
         public string Subject { get; set; }
     
