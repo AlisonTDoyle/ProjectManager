@@ -14,23 +14,32 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80*"/>
-            <RowDefinition Height="20*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
 
-        <materialDesign:Card Margin="8">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
+        <materialDesign:Card Margin="8" Padding="8">
+            <StackPanel Orientation="Vertical">
                 <Label>Subject Name</Label>
-                <TextBox x:Name="tbxSubjectName" Width="160" Height="24"></TextBox>
+                <TextBox x:Name="tbxSubjectName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160"/>
 
-                <ListBox x:Name="lbxSubjects" Grid.Column="1"></ListBox>
-            </Grid>
+                <Label>Subject Color</Label>
+                <materialDesign:ColorPicker></materialDesign:ColorPicker>
+                <TextBox x:Name="tbxSubjectColor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160"/>
+            </StackPanel>
         </materialDesign:Card>
-        <Button Grid.Row="1" Width="160" Click="Button_Click">Change Theme</Button>
+
+        <materialDesign:Card Margin="8" Grid.Column="1">
+            <ListBox x:Name="lbxSubjects"></ListBox>
+        </materialDesign:Card>
+
+        <materialDesign:Card Padding="8" Grid.Row="1" Grid.ColumnSpan="2" Margin="8">
+            <Button Width="160" Click="Button_Click">Change Theme</Button>
+        </materialDesign:Card>
     </Grid>
 </Page>
