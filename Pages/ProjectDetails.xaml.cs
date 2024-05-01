@@ -51,10 +51,17 @@ namespace ProjectManager.Pages
 
         public void RefreshProjectTasks()
         {
+            // Get data from database
             DatabaseHandler handler = new DatabaseHandler();
             List<Task> projectTasks = handler.FetchTasks(_projectId);
+
+            // Repopulate datagrid
             dgProjectTasks.ItemsSource = null;
             dgProjectTasks.ItemsSource = projectTasks;
+
+            // Refresh doughnut chart
+            LiveChartsHandler liveChartsHandler = new LiveChartsHandler();
+            SeriesCollection = liveChartsHandler.createTaskChartData(projectTasks);
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -72,9 +79,6 @@ namespace ProjectManager.Pages
             tblkDueDate.Text = test2;
 
             RefreshProjectTasks();
-
-            LiveChartsHandler liveChartsHandler = new LiveChartsHandler();
-            SeriesCollection = liveChartsHandler.createTaskChartData(projectTasks);
 
             DataContext = this;
         }

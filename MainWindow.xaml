@@ -25,7 +25,7 @@
         <!--Top app bar-->
         <Label Content="Project Manager" FontSize="40" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
-            <Button Content="Go Back" Margin="12" Padding="12, 4" VerticalAlignment="Center" Width="160" x:Name="btnDisplayProjectDashboard" Click="btnDisplayProjectDashboard_Click"/>
+            <Button Content="Go Back" Margin="12" Padding="12, 4" VerticalAlignment="Center" Width="160" x:Name="btnDisplayProjectDashboard" Click="btnDisplayProjectDashboard_Click" Style="{StaticResource MaterialDesignOutlinedButton}"/>
             <Button Content="Settings" HorizontalAlignment="Right" Padding="12, 4" Width="160" VerticalAlignment="Center" Click="Button_Click"/>
         </StackPanel>
         

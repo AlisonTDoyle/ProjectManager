@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProjectManager.Pages"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
       Background="{DynamicResource MaterialDesign.Brush.Background}"
@@ -24,7 +25,7 @@
         </Grid.RowDefinitions>
 
         <!--Project details form-->
-        <Border Background="#3D7C7C7C" CornerRadius="12" Padding="16">
+        <materialDesign:Card Padding="8">
             <Grid>
                 <!--Form layout-->
                 <Grid.ColumnDefinitions>
@@ -51,10 +52,10 @@
                 <Label Content="Due Date" Grid.Row="3" VerticalAlignment="Center"/>
                 <DatePicker Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" x:Name="dpProjectDueDate"/>
             </Grid>
-        </Border>
+        </materialDesign:Card>
 
         <!--Project tasks form-->
-        <Border Background="#3D7C7C7C" CornerRadius="12" Grid.Column="0" Grid.Row="1" Margin="0,32,0,0" Padding="16">
+        <materialDesign:Card Grid.Column="0" Grid.Row="1" Margin="0,32,0,0" Padding="8">
             <Grid>
                 <!--Form layout-->
                 <Grid.ColumnDefinitions>
@@ -88,16 +89,18 @@
                     <Button Content="Delete" Margin="16,0,0,0" Width="80" x:Name="btnDeleteTask" Click="btnDeleteTask_Click" Background="#FFE86842"/>
                 </StackPanel>
             </Grid>
-        </Border>
+        </materialDesign:Card>
 
         <!--Project tasks list-->
-        <DataGrid Grid.Column="1" Grid.RowSpan="2" Margin="32,0,0,0" x:Name="dgProjectTasks" SelectionChanged="dgProjectTasks_SelectionChanged" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Task Name" Binding="{Binding Path=Name}"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}"/>
-                <DataGridTextColumn Header="Due Date" Binding="{Binding Path=DueDate, StringFormat='{}{0:dd MMMM yyyy}'}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <materialDesign:Card Grid.Column="1" Grid.RowSpan="2" Margin="32,0,0,0" >
+            <DataGrid x:Name="dgProjectTasks" SelectionChanged="dgProjectTasks_SelectionChanged" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Task Name" Binding="{Binding Path=Name}"/>
+                        <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}"/>
+                        <DataGridTextColumn Header="Due Date" Binding="{Binding Path=DueDate, StringFormat='{}{0:dd MMMM yyyy}'}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+        </materialDesign:Card>
 
         <Button Content="Create Project" Grid.ColumnSpan="2" Grid.Row="2" x:Name="btnCreateProject" Click="btnCreateProject_Click"/>
     </Grid>
