@@ -1,18 +1,9 @@
-﻿using ProjectManager.Utilities;
+﻿using ProjectManager.Classes;
+using ProjectManager.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ProjectManager.Pages
 {
@@ -22,6 +13,7 @@ namespace ProjectManager.Pages
     public partial class NewProjectCreator : Page
     {
         private List<Task> _projectTasks = new List<Task>();
+        private List<Subject> _subjects = new List<Subject>();
 
         public NewProjectCreator()
         {
@@ -57,10 +49,15 @@ namespace ProjectManager.Pages
             CreateProject();
         }
 
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            PopulateSubjectsList();
+        }
+
         #region Methods
         private void AddTaskToDataGridView()
         {
-            // Make sure necissary feilds are filled in
+            // Make sure necessary fields are filled in
             bool namedEntered = String.IsNullOrEmpty(tbxTaskName.Text);
 
             if (namedEntered == false)
@@ -80,6 +77,10 @@ namespace ProjectManager.Pages
 
                 // Reset form
                 ClearTaskForm();
+            }
+            else
+            {
+                MessageBox.Show("Make sure task has at least a name before adding it to project", "Error");
             }
         }
 
@@ -152,20 +153,37 @@ namespace ProjectManager.Pages
         {
             // Initialising project values
             string projectName = tbxProjectName.Text;
-            string subject = tbxSubject.Text;
+            string subject = cbxSubject.Text;
             DateTime dueDate = dpProjectDueDate.SelectedDate != null ? (DateTime)dpProjectDueDate.SelectedDate : new DateTime(2000, 01, 01);
 
-            // Create project object
-            Project newProject = new Project()
+            // Make sure necissary feilds are filled in
+            if ((!String.IsNullOrEmpty(projectName)) && (!String.IsNullOrEmpty(subject)))
             {
-                Name = projectName,
-                Subject = subject,
-                DueDate = dueDate
-            };
+                // Create project object
+                Project newProject = new Project()
+                {
+                    Name = projectName,
+                    Subject = subject,
+                    DueDate = dueDate
+                };
 
-            // Add project and its tasks to database
-            DatabaseHandler handler = new DatabaseHandler();
-            handler.CreateProject(newProject, _projectTasks);
+                // Add project and its tasks to database
+                DatabaseHandler handler = new DatabaseHandler();
+                handler.CreateProject(newProject, _projectTasks);
+            }
+            else
+            {
+                MessageBox.Show("Make sure project name and subject are filled out", "Error");
+            }
+        }
+
+        private void PopulateSubjectsList()
+        {
+            JsonHandler jsonHandler = new JsonHandler();
+            _subjects = jsonHandler.ReadInSubjects();
+
+            cbxSubject.ItemsSource = null;
+            cbxSubject.ItemsSource = _subjects;
         }
         #endregion
     }

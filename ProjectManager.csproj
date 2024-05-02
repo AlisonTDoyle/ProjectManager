@@ -160,6 +160,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\Subject.cs" />
     <Compile Include="Pages\NewProjectCreator.xaml.cs">
       <DependentUpon>NewProjectCreator.xaml</DependentUpon>
     </Compile>
@@ -172,10 +173,11 @@
     <Compile Include="Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Partial Classes\Project.cs" />
+    <Compile Include="Classes\Project.cs" />
     <Compile Include="Utilities\DatabaseHandler.cs" />
     <Compile Include="Utilities\DatagridConverters.cs" />
     <Compile Include="Utilities\IntToStatusConverter.cs" />
+    <Compile Include="Utilities\JsonHandler.cs" />
     <Compile Include="Utilities\LiveChartsHandler.cs" />
     <Compile Include="Project.cs">
       <DependentUpon>ProjectDbModel.tt</DependentUpon>
@@ -265,6 +267,7 @@
     <None Include="ProjectDbModel.edmx.diagram">
       <DependentUpon>ProjectDbModel.edmx</DependentUpon>
     </None>
+    <None Include="Resources\Data\subjects.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,4 +1,5 @@
-﻿using ProjectManager.Utilities;
+﻿using ProjectManager.Classes;
+using ProjectManager.Utilities;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,6 +11,7 @@ namespace ProjectManager.Pages
     /// </summary>
     public partial class ProjectDashboard : Page
     {
+        private List<string> _subjects = new List<string>();
 
         public ProjectDashboard()
         {
@@ -21,18 +23,8 @@ namespace ProjectManager.Pages
             DatabaseHandler handler = new DatabaseHandler();
             List<Project> projects = handler.FetchProjects();
 
-            // Populate subjects list (incl. option to show all subjects)
-            List<string> subjects = new List<string>() { "All Subjects" };
-
-            List<string> databaseSubjects = handler.FetchSubjects();
-
-            foreach (string subject in databaseSubjects)
-            {
-                subjects.Add(subject);
-            }
-
             PopulateProjects(projects);
-            PopulateSelector(subjects);
+            PopulateSubjectsList();
         }
 
         private void dgProjects_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -49,7 +41,14 @@ namespace ProjectManager.Pages
             //MessageBox.Show(cbSubjectSelector.SelectedValue.ToString());
             if (cbSubjectSelector.SelectedValue.ToString() != null)
             {
-                projects = handler.FetchProjectsBySubject(cbSubjectSelector.SelectedValue.ToString());
+                if (cbSubjectSelector.SelectedValue.ToString() == "All Subjects")
+                {
+                    projects = handler.FetchProjects();
+                }
+                else
+                {
+                    projects = handler.FetchProjectsBySubject(cbSubjectSelector.SelectedValue.ToString());
+                }
 
                 PopulateProjects(projects);
             }
@@ -69,9 +68,7 @@ namespace ProjectManager.Pages
 
             if (projectName == "All Subjects")
             {
-                MessageBox.Show("test");
                 projects = handler.FetchProjects();
-                MessageBox.Show(projects.Count.ToString());
             }
             else
             {
@@ -87,10 +84,20 @@ namespace ProjectManager.Pages
             dgProjects.ItemsSource = projects;
         }
 
-        private void PopulateSelector(List<string> subjects)
+        private void PopulateSubjectsList()
         {
+            JsonHandler jsonHandler = new JsonHandler();
+            List<Subject> subjects = jsonHandler.ReadInSubjects();
+
+            // Create list of subjects
+            _subjects.Add("All Subjects");
+            for (int i = 0; i < subjects.Count; i++)
+            {
+                _subjects.Add(subjects[i].Name);
+            }
+
             cbSubjectSelector.ItemsSource = null;
-            cbSubjectSelector.ItemsSource = subjects;
+            cbSubjectSelector.ItemsSource = _subjects;
         }
     }
 }

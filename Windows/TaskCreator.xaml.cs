@@ -14,12 +14,14 @@ namespace ProjectManager.Windows
         private int _projectId;
         private Task _task;
         private ProjectDetails _parentPage;
+        protected string buttonText;
 
         public TaskCreator(int projectId, ProjectDetails parent)
         {
             InitializeComponent();
             _projectId = projectId;
             _parentPage = parent;
+            btnAddTask.Content = "Add Task";
         }
 
         public TaskCreator(Task taskToEdit, ProjectDetails parent)
@@ -27,9 +29,8 @@ namespace ProjectManager.Windows
             InitializeComponent();
             _task = taskToEdit;
             _parentPage = parent;
+            btnAddTask.Content = "Update Task";
         }
-
-
 
         private void btnAddTask_Click(object sender, RoutedEventArgs e)
         {
@@ -46,7 +47,7 @@ namespace ProjectManager.Windows
 
         private void CreateNewTask()
         {
-            // Make sure necissary feilds are filled in
+            // Make sure necessary fields are filled in
             bool namedEntered = String.IsNullOrEmpty(tbxTaskName.Text);
 
             if (namedEntered == false)
@@ -65,11 +66,15 @@ namespace ProjectManager.Windows
                 DatabaseHandler handler = new DatabaseHandler();
                 handler.CreateProjectTask(newTask);
 
-                // Refesh datagrid on project details page
+                // Refresh DataGrid on project details page
                 RefreshProjectDetailsDataGrid();
 
                 // Reset form
                 ClearTaskForm();
+            }
+            else
+            {
+                MessageBox.Show("Make sure task has at least a name before adding it to project", "Error");
             }
         }
 

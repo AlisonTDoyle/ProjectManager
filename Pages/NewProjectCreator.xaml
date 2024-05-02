@@ -9,7 +9,7 @@
       TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
       Background="{DynamicResource MaterialDesign.Brush.Background}"
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="NewProjectCreator">
+      Title="NewProjectCreator" Loaded="Page_Loaded">
 
     <Grid>
         <!--Grid definitions-->
@@ -19,13 +19,13 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="60*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="32*"/>
+            <RowDefinition Height="32*"/>
+            <RowDefinition Height="32*"/>
         </Grid.RowDefinitions>
 
         <!--Project details form-->
-        <materialDesign:Card Padding="8">
+        <materialDesign:Card Padding="8" Margin="0,0,0,16">
             <Grid>
                 <!--Form layout-->
                 <Grid.ColumnDefinitions>
@@ -47,7 +47,7 @@
                 <TextBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" x:Name="tbxProjectName"/>
 
                 <Label Content="Subject/Module" Grid.Row="2" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" x:Name="tbxSubject"/>
+                <ComboBox Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" x:Name="cbxSubject"/>
 
                 <Label Content="Due Date" Grid.Row="3" VerticalAlignment="Center"/>
                 <DatePicker Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" x:Name="dpProjectDueDate"/>
@@ -55,7 +55,7 @@
         </materialDesign:Card>
 
         <!--Project tasks form-->
-        <materialDesign:Card Grid.Column="0" Grid.Row="1" Margin="0,32,0,0" Padding="8">
+        <materialDesign:Card Grid.Column="0" Grid.Row="1" Margin="0,16,0,16" Padding="8">
             <Grid>
                 <!--Form layout-->
                 <Grid.ColumnDefinitions>
@@ -83,16 +83,20 @@
                 <Label Content="Due Date" Grid.Row="3" VerticalAlignment="Center"/>
                 <DatePicker Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" x:Name="dpTaskDueDate"/>
 
-                <StackPanel Grid.ColumnSpan="2" Grid.Row="5" HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Top">
-                    <Button Content="Add" Width="80" x:Name="btnAddTask" Click="btnAddTask_Click" Background="#FF50D27C"/>
-                    <Button Content="Update" Margin="16,0,0,0" Width="80" x:Name="btnUpdateTask" Click="btnUpdateTask_Click" Background="#FFD0CB45"/>
-                    <Button Content="Delete" Margin="16,0,0,0" Width="80" x:Name="btnDeleteTask" Click="btnDeleteTask_Click" Background="#FFE86842"/>
+                <StackPanel Grid.ColumnSpan="2" Grid.Row="5" HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,16">
+                    <Button Content="Add" Width="100" x:Name="btnAddTask" Click="btnAddTask_Click" Background="#62BE5A" BorderBrush="#FF62BE5A"/>
+                    <Button Content="Update" Margin="16,0,0,0" Width="100" x:Name="btnUpdateTask" Click="btnUpdateTask_Click" Background="#FFD0CB45" BorderBrush="#FFD0CB45"/>
+                    <Button Content="Delete" Margin="16,0,0,0" Width="100" x:Name="btnDeleteTask" Click="btnDeleteTask_Click" Background="#FFE86842" BorderBrush="#FFE86842"/>
                 </StackPanel>
             </Grid>
         </materialDesign:Card>
 
+        <materialDesign:Card Grid.Row="2" Padding="8" Margin="0,16,0,0">
+            <Button Content="Create Project" x:Name="btnCreateProject" Click="btnCreateProject_Click" VerticalAlignment="Center"/>
+        </materialDesign:Card>
+
         <!--Project tasks list-->
-        <materialDesign:Card Grid.Column="1" Grid.RowSpan="2" Margin="32,0,0,0" >
+        <materialDesign:Card Grid.Column="1" Grid.RowSpan="3" Margin="32,0,0,0" >
             <DataGrid x:Name="dgProjectTasks" SelectionChanged="dgProjectTasks_SelectionChanged" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Task Name" Binding="{Binding Path=Name}"/>
@@ -101,7 +105,5 @@
                     </DataGrid.Columns>
                 </DataGrid>
         </materialDesign:Card>
-
-        <Button Content="Create Project" Grid.ColumnSpan="2" Grid.Row="2" x:Name="btnCreateProject" Click="btnCreateProject_Click"/>
     </Grid>
 </Page>

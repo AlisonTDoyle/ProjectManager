@@ -9,7 +9,7 @@
       Background="{DynamicResource MaterialDesign.Brush.Background}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Settings"
+      Title="Settings" Loaded="Page_Loaded"
       >
 
     <Grid>
@@ -23,21 +23,27 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <!--Subjects manager-->
         <materialDesign:Card Margin="8" Padding="8">
             <StackPanel Orientation="Vertical">
+                <Label FontSize="24">Subject Manager</Label>
                 <Label>Subject Name</Label>
-                <TextBox x:Name="tbxSubjectName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160"/>
-
-                <Label>Subject Color</Label>
-                <materialDesign:ColorPicker></materialDesign:ColorPicker>
-                <TextBox x:Name="tbxSubjectColor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160"/>
+                <TextBox x:Name="tbxSubjectName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Margin="0,8"/>
+                <Button x:Name="btnAddSubject" Click="btnAddSubject_Click" Margin="0,8">Add Subject</Button>
             </StackPanel>
         </materialDesign:Card>
 
-        <materialDesign:Card Margin="8" Grid.Column="1">
-            <ListBox x:Name="lbxSubjects"></ListBox>
+        <!--Subjects list-->
+        <materialDesign:Card Margin="8" Padding="8" Grid.Column="1">
+            <StackPanel>
+                <Label FontSize="24">Subject Manager</Label>
+                <!--Height attribute needed for scrollbar-->
+                <ListBox x:Name="lbxSubjects" Height="300"></ListBox>
+                <Button x:Name="btnDeleteSubject" Background="#FFE86842" Margin="0,16" Click="btnDeleteSubject_Click">Delete Selected Subject</Button>
+            </StackPanel>
         </materialDesign:Card>
 
+        <!--Theme changer-->
         <materialDesign:Card Padding="8" Grid.Row="1" Grid.ColumnSpan="2" Margin="8">
             <Button Width="160" Click="Button_Click">Change Theme</Button>
         </materialDesign:Card>

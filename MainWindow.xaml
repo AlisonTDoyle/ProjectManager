@@ -10,7 +10,7 @@
         Background="{DynamicResource MaterialDesign.Brush.Background}"
         Style="{StaticResource MaterialDesignWindow}"
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded" WindowState="Maximized">
-    <Grid Margin="32">
+    <Grid Margin="64">
         <!--Grid definitions-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
