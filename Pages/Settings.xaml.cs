@@ -1,18 +1,10 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using ProjectManager.Classes;
+using ProjectManager.Utilities;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using MaterialDesignThemes.Wpf;
 
 namespace ProjectManager.Pages
 {
@@ -21,6 +13,8 @@ namespace ProjectManager.Pages
     /// </summary>
     public partial class Settings : Page
     {
+        private List<Subject> _subjects = new List<Subject>();
+
         public Settings()
         {
             InitializeComponent();
@@ -56,6 +50,79 @@ namespace ProjectManager.Pages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ChangeTheme();
+        }
+
+        private void PopulateSubjectsList()
+        {
+            JsonHandler jsonHandler = new JsonHandler();
+            _subjects = jsonHandler.ReadInSubjects();
+
+            lbxSubjects.ItemsSource = null;
+            lbxSubjects.ItemsSource = _subjects; 
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            PopulateSubjectsList();
+        }
+
+        private void UpdateWithNewSubjects()
+        {
+            if (!String.IsNullOrEmpty(tbxSubjectName.Text))
+            {
+                // Create subject object
+                Subject newSubject = new Subject()
+                {
+                    Name = tbxSubjectName.Text,
+                    Color = "#77777"
+                };
+
+                // Append to list
+                _subjects.Add(newSubject);
+
+                // Update file
+                JsonHandler jsonHandler = new JsonHandler();
+                jsonHandler.WriteToSubjectsFile(_subjects);
+
+                // Refresh listbox
+                PopulateSubjectsList();
+            }
+            else
+            {
+                MessageBox.Show("Please enter a name for the subject to add it to the list", "Error");
+            }
+        }
+
+        private void btnAddSubject_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateWithNewSubjects();
+        }
+
+        private void RemoveSubject()
+        {
+            int? subjectIndex = lbxSubjects.SelectedIndex;
+
+            if ((subjectIndex != null) && (subjectIndex >= 0))
+            {
+                // Remove subject
+                _subjects.RemoveAt((int)subjectIndex);
+
+                // Update file
+                JsonHandler jsonHandler = new JsonHandler();
+                jsonHandler.WriteToSubjectsFile(_subjects);
+
+                // Refresh listbox
+                PopulateSubjectsList();
+            } 
+            else
+            {
+                MessageBox.Show("Select a subject to delete", "Error");
+            }
+        }
+
+        private void btnDeleteSubject_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveSubject();
         }
     }
 }

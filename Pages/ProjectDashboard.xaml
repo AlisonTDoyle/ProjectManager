@@ -20,7 +20,7 @@
             <Style.Triggers>
                 <!-- Use the OverDayOldConverter to check if the value is over a day old -->
                 <DataTrigger Binding="{Binding Path=DueDate, Converter={StaticResource daysLeftToColor}}" Value="1">
-                    <Setter Property="Foreground" Value="#FF50D27C"/>
+                    <Setter Property="Foreground" Value="#56A34F"/>
                     <Setter Property="Margin" Value="0,8,0,0"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=DueDate, Converter={StaticResource daysLeftToColor}}" Value="2">
@@ -52,13 +52,15 @@
             </StackPanel>
         </materialDesign:Card>
 
-        <DataGrid Grid.Row="1" Margin="0,16" SelectedValuePath="Id" x:Name="dgProjects" SelectionChanged="dgProjects_SelectionChanged" AutoGenerateColumns="False" CanUserResizeRows="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Project Name" Binding="{Binding Path=Name}"/>
-                <DataGridTextColumn Header="Subject" Binding="{Binding Path=Subject}"/>
-                <DataGridTextColumn Header="Due Date" Binding="{Binding Path=DueDate, StringFormat='{}{0:dd MMMM yyyy}'}" CellStyle="{StaticResource ConditionalCellStyle}"/>
-                <DataGridTextColumn Header="Progress Percentage" Binding="{Binding Path=Progress, StringFormat='{}{0}%'}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <materialDesign:Card Grid.Row="1" Margin="0,16">
+            <DataGrid SelectedValuePath="Id" x:Name="dgProjects" SelectionChanged="dgProjects_SelectionChanged" AutoGenerateColumns="False" CanUserResizeRows="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Project Name" Binding="{Binding Path=Name}"/>
+                    <DataGridTextColumn Header="Subject" Binding="{Binding Path=Subject}"/>
+                    <DataGridTextColumn Header="Due Date" Binding="{Binding Path=DueDate, StringFormat='{}{0:dd MMMM yyyy}'}" CellStyle="{StaticResource ConditionalCellStyle}"/>
+                    <DataGridTextColumn Header="Progress Percentage" Binding="{Binding Path=Progress, StringFormat='{}{0}%'}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </materialDesign:Card>
     </Grid>
 </Page>

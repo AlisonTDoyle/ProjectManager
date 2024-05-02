@@ -22,7 +22,7 @@
             <Style.Triggers>
                 <!-- Use the OverDayOldConverter to check if the value is over a day old -->
                 <DataTrigger Binding="{Binding Path=DueDate, Converter={StaticResource daysLeftToColor}}" Value="1">
-                    <Setter Property="Foreground" Value="#FF50D27C"/>
+                    <Setter Property="Foreground" Value="#62BE5A"/>
                     <Setter Property="Margin" Value="0,8,0,0"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=DueDate, Converter={StaticResource daysLeftToColor}}" Value="2">
