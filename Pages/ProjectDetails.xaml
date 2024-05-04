@@ -9,6 +9,7 @@
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
       Background="{DynamicResource MaterialDesign.Brush.Background}"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ProjectDetails" Loaded="Page_Loaded">
@@ -35,7 +36,7 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        
+
         <Style x:Key="DisableButtonBasedOnStatus" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
             <Setter Property="IsEnabled" Value="True" />
 
@@ -54,7 +55,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Background="#147C7C7C" CornerRadius="12" Grid.RowSpan="2" Padding="16">
+        <materialDesign:Card Grid.RowSpan="2" Padding="16">
             <StackPanel>
                 <TextBlock FontSize="32" FontWeight="Bold" x:Name="tblkProjectName"/>
                 <TextBlock x:Name="tblkSubject"/>
@@ -65,29 +66,32 @@
                         <lvc:DefaultTooltip BulletSize="20"/>
                     </lvc:PieChart.DataTooltip>
                 </lvc:PieChart>
-                <Button Content="Add New Task" x:Name="btnNewTask" Click="btnNewTask_Click" Margin="0,12"/>
-                <Button Content="Delete Project" VerticalAlignment="Bottom" x:Name="btnDeleteProject" Click="btnDeleteProject_Click" Background="#FFE86842"/>
+                <Button Content="Add New Task" x:Name="btnNewTask" Click="btnNewTask_Click" Margin="0,6"/>
+                <Button Content="Edit Project Details" x:Name="btnEditProjectDetails" Margin="0,6" Click="btnEditProjectDetails_Click"/>
+                <Button Content="Delete Project" VerticalAlignment="Bottom" x:Name="btnDeleteProject" Click="btnDeleteProject_Click" Background="#FFE86842" BorderBrush="#FFE86842" Margin="0,6"/>
             </StackPanel>
-        </Border>
+        </materialDesign:Card>
 
-        <DataGrid Grid.Column="1" Grid.Row="1" Margin="32,32,0,0" x:Name="dgProjectTasks" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Task Name" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
-                <DataGridTextColumn Header="Staus" Binding="{Binding Status, Converter={StaticResource intToStatus}}"/>
-                <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate, StringFormat='{}{0:dd MMMM yyyy}'}" CellStyle="{StaticResource ConditionalCellStyle}"/>
-                <DataGridTemplateColumn Header="Actions">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button x:Name="btnDeleteTask" Content="Delete" Click="btnDeleteTask_Click" Background="#FFE86842"/>
-                                <Button x:Name="btnEditTask" Content="Edit" Margin="12,0,0,0" Click="btnEditTask_Click"/>
-                                <Button x:Name="btnChangeTaskStatus" Content="{Binding Status, Converter={StaticResource intToNestStatus}}" Style="{StaticResource DisableButtonBasedOnStatus}" Margin="12,0,0,0" Click="btnChangeTaskStatus_Click"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        <materialDesign:Card Grid.Column="1" Grid.Row="1" Margin="32, 0,0,0">
+            <DataGrid x:Name="dgProjectTasks" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Task Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                    <DataGridTextColumn Header="Staus" Binding="{Binding Status, Converter={StaticResource intToStatus}}"/>
+                    <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate, StringFormat='{}{0:dd MMMM yyyy}'}" CellStyle="{StaticResource ConditionalCellStyle}"/>
+                    <DataGridTemplateColumn Header="Actions">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="btnDeleteTask" Content="Delete" Click="btnDeleteTask_Click" Background="#FFE86842" BorderBrush="#FFE86842"/>
+                                    <Button x:Name="btnEditTask" Content="Edit" Margin="12,0,0,0" Click="btnEditTask_Click"/>
+                                    <Button x:Name="btnChangeTaskStatus" Content="{Binding Status, Converter={StaticResource intToNestStatus}}" Style="{StaticResource DisableButtonBasedOnStatus}" Margin="12,0,0,0" Click="btnChangeTaskStatus_Click"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </materialDesign:Card>
     </Grid>
 </Page>

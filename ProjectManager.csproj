@@ -200,6 +200,9 @@
     <Compile Include="Task.cs">
       <DependentUpon>ProjectDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ProjectDetailsManager.xaml.cs">
+      <DependentUpon>ProjectDetailsManager.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\TaskCreator.xaml.cs">
       <DependentUpon>TaskCreator.xaml</DependentUpon>
     </Compile>
@@ -228,6 +231,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ProjectDetailsManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -274,10 +281,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ProjectDB.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="ProjectDB_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>ProjectDB.mdf</DependentUpon>
     </Content>
     <Content Include="ProjectDbModel.Context.tt">
@@ -290,6 +297,7 @@
       <DependentUpon>ProjectDbModel.edmx</DependentUpon>
       <LastGenOutput>ProjectDbModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\Images\project-management.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

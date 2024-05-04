@@ -31,7 +31,7 @@ namespace ProjectManager.Pages
         private void DeleteProject()
         {
             // Double check with user they want to delete project
-            if (MessageBox.Show("Are you sure you want to delete this project? This action is ireverable", "Error", MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
+            if (MessageBox.Show("Are you sure you want to delete this project? This action is irreversible", "Error", MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
             {
                 // Remove project and associated tasks from database
                 DatabaseHandler handler = new DatabaseHandler();
@@ -61,25 +61,18 @@ namespace ProjectManager.Pages
 
             // Refresh doughnut chart
             LiveChartsHandler liveChartsHandler = new LiveChartsHandler();
-            SeriesCollection = liveChartsHandler.createTaskChartData(projectTasks);
+            //if (SeriesCollection != null)
+            //{
+            //    SeriesCollection.Clear();
+            //}
+            SeriesCollection = liveChartsHandler.createTaskChartData(handler.FetchTasks(_projectId));
+            //Chart.Update();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            // Fetch project details
-            DatabaseHandler handler = new DatabaseHandler();
-            Project project = (Project)handler.FetchProjectById(_projectId);
-            List<Task> projectTasks = handler.FetchTasks(_projectId);
-
-            // Display project details
-            tblkProjectName.Text = project.Name;
-            tblkSubject.Text = project.Subject;
-            DateTime test = (DateTime)project.DueDate;
-            string test2 = test.ToString("dd MMMM yyyy");
-            tblkDueDate.Text = test2;
-
+            PopulateProjectDetails();
             RefreshProjectTasks();
-
             DataContext = this;
         }
 
@@ -153,6 +146,24 @@ namespace ProjectManager.Pages
             {
                 MessageBox.Show("Unable to update project's status", "Error");
             }
+        }
+
+        private void btnEditProjectDetails_Click(object sender, RoutedEventArgs e)
+        {
+            ProjectDetailsManager projectDetailsManager = new ProjectDetailsManager(_projectId, this);
+            projectDetailsManager.Show();
+        }
+
+        public void PopulateProjectDetails()
+        {
+            DatabaseHandler handler = new DatabaseHandler();
+            Project project = (Project)handler.FetchProjectById(_projectId);
+
+            tblkProjectName.Text = project.Name;
+            tblkSubject.Text = project.Subject;
+            DateTime date = (DateTime)project.DueDate;
+            string dateAsString = date.ToString("dd MMMM yyyy");
+            tblkDueDate.Text = dateAsString;
         }
     }
 }

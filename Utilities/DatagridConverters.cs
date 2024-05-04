@@ -15,17 +15,17 @@ namespace ProjectManager.Utilities
             int priority = 0;
             DateTime today = DateTime.Now;
 
-            if ((value == null) || ((today - (DateTime)value).TotalDays <= 1))
+            if ((value == null) || (((DateTime)value - today).TotalDays <= 1))
             {
-                priority = 1;
+                priority = 3;
             }
-            else if ((today - (DateTime)value).TotalDays <= 5)
+            else if (((DateTime)value - today).TotalDays <= 5)
             {
                 priority = 2;
             }
             else
             {
-                priority = 3;
+                priority = 1;
             }
 
             return priority;
