@@ -25,27 +25,31 @@
 
         <!--Subjects manager-->
         <materialDesign:Card Margin="8" Padding="8">
-            <StackPanel Orientation="Vertical">
-                <Label FontSize="24">Subject Manager</Label>
-                <Label>Subject Name</Label>
-                <TextBox x:Name="tbxSubjectName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Margin="0,8"/>
-                <Button x:Name="btnAddSubject" Click="btnAddSubject_Click" Margin="0,8">Add Subject</Button>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical">
+                    <Label  FontSize="24" FontWeight="Bold" >Subject Manager</Label>
+                    <Label>Subject Name</Label>
+                    <TextBox x:Name="tbxSubjectName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Margin="0,8"/>
+                    <Button x:Name="btnAddSubject" Click="btnAddSubject_Click" Margin="0,8">Add Subject</Button>
+                    <Button x:Name="btnDeleteSubject" Background="#FFE86842" BorderBrush="#FFE86842" Margin="0,16" Click="btnDeleteSubject_Click">Delete Selected Subject</Button>
+                </StackPanel>
+                <materialDesign:Card Margin="128, 8" Padding="8" Grid.Column="1" Width="374">
+                    <StackPanel>
+                        <!--Height attribute needed for scrollbar-->
+                        <ListBox x:Name="lbxSubjects" Height="300"></ListBox>
+                    </StackPanel>
+                </materialDesign:Card>
             </StackPanel>
         </materialDesign:Card>
 
         <!--Subjects list-->
-        <materialDesign:Card Margin="8" Padding="8" Grid.Column="1">
-            <StackPanel>
-                <Label FontSize="24">Subject Manager</Label>
-                <!--Height attribute needed for scrollbar-->
-                <ListBox x:Name="lbxSubjects" Height="300"></ListBox>
-                <Button x:Name="btnDeleteSubject" Background="#FFE86842" Margin="0,16" Click="btnDeleteSubject_Click">Delete Selected Subject</Button>
-            </StackPanel>
-        </materialDesign:Card>
 
         <!--Theme changer-->
-        <materialDesign:Card Padding="8" Grid.Row="1" Grid.ColumnSpan="2" Margin="8">
-            <Button Width="160" Click="Button_Click">Change Theme</Button>
+        <materialDesign:Card Padding="8" Grid.Column="1" Margin="8">
+            <StackPanel>
+                <Label FontSize="24" FontWeight="Bold" >Theme Manager</Label>
+                <Button Width="160" Click="Button_Click">Change Theme</Button>
+            </StackPanel>
         </materialDesign:Card>
     </Grid>
 </Page>

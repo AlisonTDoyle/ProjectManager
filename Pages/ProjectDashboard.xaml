@@ -46,7 +46,7 @@
                 <ComboBox Padding="4,8" Width="240" VerticalAlignment="Center" x:Name="cbSubjectSelector" SelectionChanged="cbSubjectSelector_SelectionChanged">
                 </ComboBox>
 
-                <TextBox Margin="12,0,0,0" Padding="4,8" Width="240" VerticalAlignment="Center" x:Name="tbxProjectSearchBox" TextChanged="tbxProjectSearchBox_TextChanged"/>
+                <TextBox Margin="12,0,0,0" Padding="4,8" Width="240" VerticalAlignment="Center" x:Name="tbxProjectSearchBox" TextChanged="tbxProjectSearchBox_TextChanged" LostFocus="tbxProjectSearchBox_LostFocus" GotFocus="tbxProjectSearchBox_GotFocus"/>
 
                 <Button Margin="12,0,0,0" Content="Create New Project" HorizontalAlignment="Right" x:Name="btnCreateNewProject" Click="btnCreateNewProject_Click" Width="160"/>
             </StackPanel>
@@ -58,7 +58,7 @@
                     <DataGridTextColumn Header="Project Name" Binding="{Binding Path=Name}"/>
                     <DataGridTextColumn Header="Subject" Binding="{Binding Path=Subject}"/>
                     <DataGridTextColumn Header="Due Date" Binding="{Binding Path=DueDate, StringFormat='{}{0:dd MMMM yyyy}'}" CellStyle="{StaticResource ConditionalCellStyle}"/>
-                    <DataGridTextColumn Header="Progress Percentage" Binding="{Binding Path=Progress, StringFormat='{}{0}%'}"/>
+                    <DataGridTextColumn Header="Progress Percentage" Binding="{Binding Path=Progress, StringFormat='{}{0:n0}%'}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </materialDesign:Card>

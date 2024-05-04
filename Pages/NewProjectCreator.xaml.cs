@@ -156,7 +156,7 @@ namespace ProjectManager.Pages
             string subject = cbxSubject.Text;
             DateTime dueDate = dpProjectDueDate.SelectedDate != null ? (DateTime)dpProjectDueDate.SelectedDate : new DateTime(2000, 01, 01);
 
-            // Make sure necissary feilds are filled in
+            // Make sure necessary fields are filled in
             if ((!String.IsNullOrEmpty(projectName)) && (!String.IsNullOrEmpty(subject)))
             {
                 // Create project object
@@ -170,6 +170,10 @@ namespace ProjectManager.Pages
                 // Add project and its tasks to database
                 DatabaseHandler handler = new DatabaseHandler();
                 handler.CreateProject(newProject, _projectTasks);
+
+                // Send user back to home page
+                MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+                mainWindow.Main.Navigate(new ProjectDashboard());
             }
             else
             {

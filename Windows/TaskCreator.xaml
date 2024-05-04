@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectManager.Windows"
         mc:Ignorable="d"
-        Title="Task Manager" Height="320" Width="320"
+        Title="Task Manager" Height="360" Width="320"
       TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
       Background="{DynamicResource MaterialDesign.Brush.Background}" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" Loaded="Window_Loaded">
 
@@ -13,36 +13,20 @@
     </Window.Resources>
     
     <Border CornerRadius="12" Grid.Column="0" Grid.Row="1" Padding="16">
-        <Grid>
-            <!--Form layout-->
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="48"/>
-                <RowDefinition Height="36"/>
-                <RowDefinition Height="36"/>
-                <RowDefinition Height="36"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
+        <StackPanel>
             <!--Form contents-->
             <Label Content="Project Task" FontSize="24" FontWeight="Bold" Grid.ColumnSpan="2"/>
 
-            <Label Content="Name" Grid.Row="1" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" x:Name="tbxTaskName"/>
+            <Label Content="Name" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" VerticalAlignment="Center" x:Name="tbxTaskName"/>
 
-            <Label Content="Description" Grid.Row="2" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" x:Name="tbxTaskDescription"/>
+            <Label Content="Description" VerticalAlignment="Center" Margin="0,16,0,0"/>
+            <TextBox Grid.Column="1" VerticalAlignment="Center" x:Name="tbxTaskDescription"/>
 
-            <Label Content="Due Date" Grid.Row="3" VerticalAlignment="Center"/>
-            <DatePicker Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" x:Name="dpTaskDueDate"/>
+            <Label Content="Due Date" VerticalAlignment="Center" Margin="0,16,0,0"/>
+            <DatePicker Grid.Column="1" VerticalAlignment="Center" x:Name="dpTaskDueDate"/>
 
-            <StackPanel Grid.ColumnSpan="2" Grid.Row="5" HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Top">
-                <Button Width="160" x:Name="btnAddTask" Click="btnAddTask_Click" Margin="12"/>
-            </StackPanel>
-        </Grid>
+            <Button Margin="0,16,0,0" x:Name="btnAddTask" Click="btnAddTask_Click"/>
+        </StackPanel>
     </Border>
 </Window>

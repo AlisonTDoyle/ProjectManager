@@ -118,6 +118,22 @@ namespace ProjectManager.Utilities
 
             return subjects;
         }
+
+        public void UpdateProject(int id, string name, string subject, DateTime dueDate)
+        {
+            // Get item to update
+            var projectToUpdate = (from project in db.Projects
+                                where project.Id == id
+                                select project).FirstOrDefault();
+
+            // Change properties
+            projectToUpdate.Name = name;
+            projectToUpdate.Subject = subject;
+            projectToUpdate.DueDate = dueDate;
+
+            // Save changes
+            db.SaveChanges();
+        }
         #endregion
 
         #region Task table methods
@@ -176,6 +192,11 @@ namespace ProjectManager.Utilities
 
             // Save changes
             db.SaveChanges();
+        }
+
+        internal void UpdateProject(int projectId, string name, string subject, DateTime? date)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

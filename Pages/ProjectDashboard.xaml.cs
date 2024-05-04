@@ -1,5 +1,6 @@
 ﻿using ProjectManager.Classes;
 using ProjectManager.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +26,8 @@ namespace ProjectManager.Pages
 
             PopulateProjects(projects);
             PopulateSubjectsList();
+
+            tbxProjectSearchBox.Text = "Enter project name...";
         }
 
         private void dgProjects_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -66,7 +69,7 @@ namespace ProjectManager.Pages
             List<Project> projects = new List<Project>();
             string projectName = tbxProjectSearchBox.Text;
 
-            if (projectName == "All Subjects")
+            if ((projectName == "All Subjects") || (tbxProjectSearchBox.Text == "Enter project name..."))
             {
                 projects = handler.FetchProjects();
             }
@@ -98,6 +101,22 @@ namespace ProjectManager.Pages
 
             cbSubjectSelector.ItemsSource = null;
             cbSubjectSelector.ItemsSource = _subjects;
+        }
+
+        private void tbxProjectSearchBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrEmpty(tbxProjectSearchBox.Text)) 
+            {
+                tbxProjectSearchBox.Text = "Enter project name...";
+            }
+        }
+
+        private void tbxProjectSearchBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (tbxProjectSearchBox.Text == "Enter project name...")
+            {
+                tbxProjectSearchBox.Text = "";
+            }
         }
     }
 }

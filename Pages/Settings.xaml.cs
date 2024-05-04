@@ -56,6 +56,7 @@ namespace ProjectManager.Pages
         {
             JsonHandler jsonHandler = new JsonHandler();
             _subjects = jsonHandler.ReadInSubjects();
+            _subjects.Sort();
 
             lbxSubjects.ItemsSource = null;
             lbxSubjects.ItemsSource = _subjects; 
@@ -70,9 +71,25 @@ namespace ProjectManager.Pages
         {
             if (!String.IsNullOrEmpty(tbxSubjectName.Text))
             {
+                // Generate a unique id
+                Random random = new Random();
+                int id;
+                List<int> subjectIds = new List<int>();
+                for (int i = 0; i < _subjects.Count; i++)
+                {
+                    subjectIds.Add(_subjects[i].Id);
+                }
+
+                do
+                {
+                    id = random.Next(1000, 10000);
+                }
+                while (subjectIds.Contains(id));
+
                 // Create subject object
                 Subject newSubject = new Subject()
                 {
+                    Id = id,
                     Name = tbxSubjectName.Text,
                     Color = "#77777"
                 };
@@ -84,8 +101,9 @@ namespace ProjectManager.Pages
                 JsonHandler jsonHandler = new JsonHandler();
                 jsonHandler.WriteToSubjectsFile(_subjects);
 
-                // Refresh listbox
+                // Refresh listbox and form
                 PopulateSubjectsList();
+                tbxSubjectName.Text = "";
             }
             else
             {
@@ -100,12 +118,12 @@ namespace ProjectManager.Pages
 
         private void RemoveSubject()
         {
-            int? subjectIndex = lbxSubjects.SelectedIndex;
+            Subject selectedSubject = (Subject)lbxSubjects.SelectedItem;
 
-            if ((subjectIndex != null) && (subjectIndex >= 0))
+            if (selectedSubject != null)
             {
                 // Remove subject
-                _subjects.RemoveAt((int)subjectIndex);
+                _subjects.Remove(selectedSubject);
 
                 // Update file
                 JsonHandler jsonHandler = new JsonHandler();
